@@ -32,31 +32,6 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
 }
 
-publishing {
-    repositories {
-        maven {
-            name = "LiquifyAnviGui"
-            url = "https://gitlab.com/api/v4/projects/40887307/packages/maven"
-            credentials(HttpHeaderCredentials) {
-                name = "Private-Token"
-                value = project.findProperty("gitlab.key") ?: System.getenv("AP_DEPLOY_TOKEN")
-            }
-            authentication {
-                header(HttpHeaderAuthentication)
-            }
-        }
-    }
-
-    publications {
-        common(MavenPublication) {
-            groupId 'net.liquifymc.integrations'
-            artifactId project.name
-
-            artifact jar
-        }
-    }
-}
-
 def targetJavaVersion = 17
 java {
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
